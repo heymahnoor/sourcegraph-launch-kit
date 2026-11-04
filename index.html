@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic Batch Changes: Scale-Up Launch Kit · Mahnoor Shahid</title>
+<meta name="description" content="An independent product marketing work sample: positioning, launch plan, sales enablement and metrics for scaling Sourcegraph Agentic Batch Changes after GA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f7f4; --surface:#ffffff; --ink:#151821; --ink-2:#4a5160; --line:#e3e4e0;
+  --accent:#5b4bdb; --accent-soft:#eeebff; --good:#1f7a4d; --warn:#9a5b00; --code:#f1f1ec;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0f1117; --surface:#171a22; --ink:#eceef3; --ink-2:#a9afbd; --line:#2a2f3b;
+    --accent:#9d92ff; --accent-soft:#25223f; --good:#5fd39a; --warn:#f0b35a; --code:#1e222c; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+a{color:var(--accent)}
+code,.mono{font-family:var(--mono);font-size:.88em;background:var(--code);padding:.1em .35em;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:40px}
+nav.toc{position:sticky;top:20px;align-self:start;padding:28px 0;font-size:14px}
+nav.toc b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px}
+nav.toc a{display:block;color:var(--ink-2);text-decoration:none;padding:4px 0 4px 10px;border-left:2px solid var(--line)}
+nav.toc a:hover{color:var(--accent);border-color:var(--accent)}
+main{padding:28px 0 80px;min-width:0}
+header.hero{padding:36px 0 28px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.eyebrow{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.04em}
+h1{font-size:42px;line-height:1.12;margin:10px 0 14px;letter-spacing:-.02em}
+h2{font-size:28px;margin:56px 0 8px;letter-spacing:-.01em;scroll-margin-top:16px}
+h3{font-size:19px;margin:28px 0 8px}
+.lead{font-size:19px;color:var(--ink-2);max-width:820px}
+.note{font-size:14px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--warn);padding:12px 14px;border-radius:8px;margin:18px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pill{font-size:13px;border:1px solid var(--line);background:var(--surface);padding:4px 10px;border-radius:999px;color:var(--ink-2)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h4{margin:0 0 6px;font-size:16px}
+.card p{margin:0;color:var(--ink-2);font-size:15px}
+.stat{font-size:30px;font-weight:700;color:var(--accent);line-height:1.1}
+.stat-label{font-size:14px;color:var(--ink-2);margin-top:6px}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14.5px;margin:12px 0}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--accent-soft);font-weight:600;font-size:13.5px}
+tr:last-child td{border-bottom:none}
+.tablewrap{overflow-x:auto}
+ul.tight{margin:6px 0;padding-left:20px}
+ul.tight li{margin:3px 0}
+.house{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.house .roof{background:var(--accent);color:#fff;padding:18px 20px}
+.house .roof b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.house .roof p{margin:6px 0 0;font-size:20px;font-weight:600;line-height:1.35}
+.house .pillars{display:grid;grid-template-columns:repeat(3,1fr)}
+.house .pillar{padding:16px 18px;border-right:1px solid var(--line)}
+.house .pillar:last-child{border-right:none}
+.house .pillar h4{margin:0 0 4px}
+.house .pillar .tag{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.house .base{background:var(--code);padding:12px 18px;font-size:14px;color:var(--ink-2);border-top:1px solid var(--line)}
+.quote{border-left:3px solid var(--accent);padding:4px 14px;color:var(--ink-2);font-style:italic;margin:12px 0}
+.diagram{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:760px;height:auto}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.phase{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:10px;padding:12px}
+.phase .when{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.phase h4{margin:4px 0 6px;font-size:15px}
+.phase ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-2)}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.calc label{display:block;font-size:14px;color:var(--ink-2);margin:8px 0 4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.calc .out{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.calc .out div{background:var(--accent-soft);border-radius:10px;padding:12px}
+.calc .out b{display:block;font-size:22px}
+.calc .out span{font-size:13px;color:var(--ink-2)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+details summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--line);margin-top:56px;padding-top:18px;font-size:14px;color:var(--ink-2)}
+.sources li{margin:4px 0;font-size:14px}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  nav.toc{display:none}
+  .g3,.g4,.house .pillars,.timeline{grid-template-columns:1fr}
+  .g2{grid-template-columns:1fr}
+  .house .pillar{border-right:none;border-bottom:1px solid var(--line)}
+  h1{font-size:32px}
+  .calc .out{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc">
+  <b>Launch kit</b>
+  <a href="#brief">0. The brief</a>
+  <a href="#market">1. Market &amp; competition</a>
+  <a href="#personas">2. Personas</a>
+  <a href="#positioning">3. Positioning &amp; messaging</a>
+  <a href="#audit">3b. Messaging audit of today's page</a>
+  <a href="#how">4. How it works &amp; demo</a>
+  <a href="#launch">5. Launch plan</a>
+  <a href="#enablement">6. Sales enablement</a>
+  <a href="#campaigns">7. Integrated campaigns</a>
+  <a href="#metrics">8. Metrics &amp; attribution</a>
+  <a href="#plan">9. 30 / 90 / 180 / 365</a>
+  <a href="#assumptions">10. Open questions</a>
+  <a href="#sources">Sources</a>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">// product marketing work sample · senior PMM</div>
+  <h1>Agentic Batch Changes:<br>the scale-up launch kit</h1>
+  <p class="lead">Agentic Batch Changes reached general availability on 14 September 2026. GA proves the product works. The next job is to make fleet-wide change a repeatable, measurable motion that sales can sell, DevRel can champion and customers expand. This kit is how I would run that.</p>
+  <div class="meta">
+    <span class="pill">By Mahnoor Shahid</span>
+    <span class="pill">Prepared 4 Nov 2026</span>
+    <span class="pill">Public information only</span>
+    <a class="pill" href="https://www.linkedin.com/in/heymahnoor">linkedin.com/in/heymahnoor</a>
+  </div>
+  <div class="note"><b>Independent work sample.</b> I am not affiliated with Sourcegraph. Everything here is built from Sourcegraph's public changelog, docs, blog and press releases (listed under <a href="#sources">Sources</a>). Illustrative numbers are labelled as such. Internal data would change some choices; section 10 lists what I would validate first.</div>
+</header>
+
+<!-- 0 BRIEF -->
+<section id="brief">
+<h2>0. The brief</h2>
+<p><b>Goal for the next 90 days:</b> turn Agentic Batch Changes (ABC) from a GA announcement into a repeatable pipeline motion: more accounts running their first fleet-wide change, more merged changesets per account, and a story the field can tell in five minutes.</p>
+<div class="grid g4">
+  <div class="card"><div class="stat">~500k</div><div class="stat-label">changesets merged per year through Batch Changes at large enterprises (CEO, GA release)</div></div>
+  <div class="card"><div class="stat">1,000+</div><div class="stat-label">changesets merged by customers during the ABC beta</div></div>
+  <div class="card"><div class="stat">6</div><div class="stat-label">code hosts supported: GitHub, GitLab, Bitbucket Server &amp; Cloud, Azure DevOps, Gerrit</div></div>
+  <div class="card"><div class="stat">$ / merge</div><div class="stat-label">outcome-based pricing: billed per changeset merged, not per PR opened</div></div>
+</div>
+<h3>Why this launch matters now</h3>
+<ul class="tight">
+  <li><b>The inner loop got fast; the outer loop didn't.</b> Coding agents made single-repo work cheap. Fleet-wide work (CVE fixes, dependency upgrades with breaking changes, end-of-life deadlines) is still tickets, spreadsheets and chasing owners across hundreds of repos.</li>
+  <li><b>Self-hosted is now live.</b> ABC shipped to self-hosted customers with Sourcegraph 8.0 on 16 September 2026, which opens the regulated and security-conscious accounts that run Sourcegraph on their own infrastructure.</li>
+  <li><b>Pricing is a story, not a footnote.</b> Paying only for merged changesets lowers the risk of trying it and aligns spend with outcomes. Few AI tools can say that.</li>
+  <li><b>The product keeps moving.</b> On 28 September ABC moved to a Sourcegraph-managed coding agent with MCP and Finder, Oracle and Worker subagents, while existing batch specs stay compatible. Messaging has to keep pace with a fast-changing product.</li>
+</ul>
+<h3>Three bets this kit makes</h3>
+<div class="grid g3">
+  <div class="card"><h4>1. Own the category word</h4><p>Name the problem as <b>fleet-wide change</b>, the outer loop of software. Coding agents own the inner loop; Sourcegraph owns everything that spans repos.</p></div>
+  <div class="card"><h4>2. Lead with security, expand with migrations</h4><p>CVE remediation has urgency, a budget owner and a deadline. It is the fastest first win, and migrations become the expansion.</p></div>
+  <div class="card"><h4>3. Sell trust, not autonomy</h4><p>Engineers distrust "autonomous refactoring". They trust plans, CI-healthy diffs and their own approval on every changeset.</p></div>
+</div>
+</section>
+
+<!-- 1 MARKET -->
+<section id="market">
+<h2>1. Market &amp; competition</h2>
+<p>Buyers will compare ABC with what they already have, not with a category map. The honest frame is: each alternative is good at part of the job; ABC is built for the whole job across the whole codebase.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Alternative</th><th style="width:27%">Where it's strong</th><th style="width:27%">Where it stops</th><th style="width:26%">How we position against it</th></tr>
+<tr><td><b>Single-repo coding agents</b><br>(e.g. Claude Code, Codex, Cursor, Copilot)</td><td>Fast, flexible edits with judgment inside one repo; developers already use them daily.</td><td>No view of which of 2,000 repos are affected, no coordination of hundreds of PRs, no fleet-level tracking of what merged.</td><td><b>Complement, don't fight.</b> "Keep your agent for the inner loop. ABC is how you point agents at the whole fleet." The Sourcegraph MCP server already gives these agents codebase context.</td></tr>
+<tr><td><b>Deterministic refactoring</b><br>(e.g. OpenRewrite / Moderne)</td><td>Repeatable, recipe-based transforms on a lossless semantic tree; strong in JVM ecosystems; same input gives same output.</td><td>Needs a recipe for each change; changes that need judgment or vary per repo are harder to express.</td><td><b>Both, by design.</b> ABC runs a script where a change is deterministic and a coding agent where it needs judgment, decided per step of the plan.</td></tr>
+<tr><td><b>DIY scripts + tickets</b><br>(shell, codemods, Jira epics)</td><td>Cheap to start, fully in the team's control.</td><td>Breaks on repo variation, CI failures and merge conflicts; progress lives in spreadsheets; owners get chased for months.</td><td><b>Same control, without the chasing.</b> ABC reacts to CI, resolves conflicts and tracks every changeset in one place.</td></tr>
+<tr><td><b>Classic Batch Changes</b><br>(Sourcegraph, existing users)</td><td>Proven at scale; batch specs, tracking and bulk operations teams already trust.</td><td>The author still writes the spec and steps, and handles per-repo variation and CI fixes by hand.</td><td><b>Upgrade path, not replacement.</b> Existing batch specs stay compatible; ABC adds planning, judgment and CI reaction on top.</td></tr>
+</table></div>
+<p class="note" style="border-left-color:var(--accent)">Competitive rule for the field: never claim a competitor "can't" do something. Say what ABC does and let the buyer compare. Engineers check claims, and one wrong claim costs the whole deal its credibility.</p>
+</section>
+
+<!-- 2 PERSONAS -->
+<section id="personas">
+<h2>2. Personas</h2>
+<p>Enterprise deals here involve a buying committee. The user who runs the change is rarely the person who signs, so each role needs its own message and proof.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:17%">Persona</th><th style="width:15%">Role in deal</th><th style="width:24%">Pain</th><th style="width:20%">Trigger</th><th style="width:24%">What they need to hear and see</th></tr>
+<tr><td><b>Head of Platform / DevEx</b></td><td>Champion, often budget owner</td><td>Every org-wide change becomes a months-long programme of tickets and nagging teams.</td><td>A mandated upgrade, framework change or internal API rollout.</td><td>"Describe the change once; get CI-healthy PRs across every affected repo." Proof: plan view, tracking dashboard, Canva's 50+ merged PRs.</td></tr>
+<tr><td><b>AppSec / Product Security lead</b></td><td>Urgent buyer, strong influencer</td><td>Finding is easy; fixing a vulnerability across 80 repos is slow, and coverage is hard to prove.</td><td>A new CVE, an audit finding, a pen-test report.</td><td>"Find every affected repo, patch it and show remediation progress." Proof: Mercari's GitHub Actions fix across ~80 repos; Code Insights for progress.</td></tr>
+<tr><td><b>VP / SVP Engineering</b></td><td>Economic buyer</td><td>Senior engineers spend weeks on maintenance instead of roadmap work; deadlines slip.</td><td>Planning cycle, end-of-life deadline, board-level security pressure.</td><td>Engineering hours returned, risk closed faster, and pricing tied to merged outcomes. Proof: ROI model (section 6).</td></tr>
+<tr><td><b>Staff / Principal engineer</b></td><td>Daily user, technical evaluator</td><td>Owns the migration, writes the codemod, fights per-repo edge cases and flaky CI.</td><td>Assigned the migration nobody wants.</td><td>Exact mechanics: how the plan is built, when a script vs an agent runs, how CI failures are handled, that they approve every diff. No hype.</td></tr>
+<tr><td><b>Repo / service owners</b></td><td>Reviewers; can block adoption</td><td>Unwanted PRs from a bot that don't understand their service.</td><td>A batch of PRs landing in their queue.</td><td>PRs that pass CI, follow their <code>AGENTS.md</code> guidance and arrive with clear descriptions or commit trailers (<code>batchChanges.attributionMode</code>).</td></tr>
+<tr><td><b>Procurement / Security review</b></td><td>Gatekeeper</td><td>AI tools with unclear data flows and unpredictable cost.</td><td>Any AI purchase.</td><td>Self-hosted option (8.0), admin controls and entitlements, and cost that scales with merged changesets.</td></tr>
+</table></div>
+</section>
+
+<!-- 3 POSITIONING -->
+<section id="positioning">
+<h2>3. Positioning &amp; messaging</h2>
+<h3>Positioning statement</h3>
+<p class="quote" style="font-style:normal">For platform and security teams at large engineering organisations who must make the same change across hundreds or thousands of repositories, <b>Agentic Batch Changes</b> is the agent for fleet-wide change. Unlike single-repo coding agents or recipe-only refactoring tools, it uses Sourcegraph's understanding of the entire codebase to plan the change, applies it with a script or with judgment as each repo needs, keeps going until CI passes, and leaves every merge to a human, so you pay only for changes that ship.</p>
+
+<h3>Messaging house</h3>
+<div class="house">
+  <div class="roof"><b>Umbrella message</b><p>Describe the change once. Ship it everywhere it needs to go, with your engineers approving every diff.</p></div>
+  <div class="pillars">
+    <div class="pillar"><span class="tag">pillar 1 · scope</span><h4>See every place the change applies</h4><p>Built on Sourcegraph's index of all your code. Deep Search and Code Search find every affected repo and build the plan before any code changes.</p></div>
+    <div class="pillar"><span class="tag">pillar 2 · execute</span><h4>Change code with judgment, not find-and-replace</h4><p>Scripts for deterministic changes, a coding agent for changes that need judgment. Validated on one repo first, then fanned out. Reads CI logs, fixes failures, resolves conflicts.</p></div>
+    <div class="pillar"><span class="tag">pillar 3 · control</span><h4>Stay in control, pay for outcomes</h4><p>Engineers review and approve every changeset. Merge status for every PR in one place. Billed per changeset merged, never for PRs you decline.</p></div>
+  </div>
+  <div class="base"><b>Proof base:</b> ~500k changesets/year through Batch Changes · 1,000+ ABC changesets merged in beta · Mercari: ~80 repos patched for a GitHub Actions vulnerability · Canva: 50+ merged PRs on a library migration · 6 code hosts · Cloud and self-hosted (8.0)</div>
+</div>
+
+<h3>Message by persona</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Persona</th><th style="width:40%">Lead line</th><th>Supporting proof</th></tr>
+<tr><td>Head of Platform</td><td>"Run your next org-wide migration as one plan, not 300 tickets."</td><td>Plan view, per-repo variation handling, merge tracking in one place.</td></tr>
+<tr><td>AppSec lead</td><td>"From vulnerability found to patched everywhere, with progress you can show auditors."</td><td>Mercari case; Code Insights tracking remediation.</td></tr>
+<tr><td>VP Engineering</td><td>"Give senior engineers their roadmap time back, and pay only for changes that merge."</td><td>Outcome-based pricing; ROI model.</td></tr>
+<tr><td>Staff engineer</td><td>"It writes the plan, tries one repo, then fans out. You review the diffs. CI tells it what to fix."</td><td>Live demo; scripts vs agent per step; existing specs compatible.</td></tr>
+<tr><td>Repo owners</td><td>"PRs that already pass your CI and follow your repo's rules."</td><td><code>AGENTS.md</code> and skills at user, org and global level; attribution in commit trailers.</td></tr>
+</table></div>
+
+<h3>Developer authenticity: words we use and avoid</h3>
+<div class="grid g2">
+  <div class="card"><h4 style="color:var(--good)">Use</h4><p>changeset · fleet-wide · CI-healthy · you approve every diff · plan · per-repo variation · merged, not opened · validated on one repo first · outer loop</p></div>
+  <div class="card"><h4 style="color:var(--warn)">Avoid</h4><p>magic · autonomous refactoring · 10x · "replaces engineers" · zero-touch · "fixes your tech debt" · any claim we can't show in a demo</p></div>
+</div>
+</section>
+
+<!-- 3b AUDIT -->
+<section id="audit">
+<h2>3b. Messaging audit of today's ABC page</h2>
+<p>I read the current <a href="https://sourcegraph.com/agentic-batch-changes">Agentic Batch Changes page</a> and the <a href="https://sourcegraph.com">homepage</a> as a first-time enterprise buyer would. The foundation is strong. These are the gaps I would close first, in priority order.</p>
+<div class="grid g2">
+  <div class="card"><h4 style="color:var(--good)">What already works</h4><ul class="tight">
+    <li><b>"One migration. Every repository."</b> is a sharp, ownable hero.</li>
+    <li>The plan → scope → execute → publish → verify pipeline explains the product in five words.</li>
+    <li>"Pay per changeset merged, not per token, seat, or attempt" is a rare, credible differentiator.</li>
+    <li>Scripts vs coding agents is explained honestly, which earns developer trust.</li>
+  </ul></div>
+  <div class="card"><h4 style="color:var(--warn)">Where buyers will still hesitate</h4><ul class="tight">
+    <li>Security buyers don't see themselves: CVE remediation is one item in a list of 13 migration examples, even though the lead customer story (Mercari) is a security fix.</li>
+    <li>"Why not just use our coding agent?" is the first question every visitor with Copilot or Claude Code will have, and the page doesn't answer it directly.</li>
+    <li>The proof has no numbers on the page: the quotes don't carry Mercari's ~80 repos or Canva's 50+ merged PRs, which are in the press release.</li>
+    <li>The closing line names Sourcegraph Cloud only; self-hosted availability with 8.0 isn't mentioned, so the most regulated buyers may assume it isn't for them.</li>
+    <li>There's no FAQ, so cost, data handling and "what counts as a changeset" questions go to sales instead of being answered on the page.</li>
+  </ul></div>
+</div>
+<h3>What I would change</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:24%">Change</th><th style="width:46%">Copy / asset</th><th>Why</th></tr>
+<tr><td>Add a security path</td><td>Sub-page: <b>"Found once. Fixed everywhere."</b> "Patch a vulnerable pattern across every affected repository, with CI passing and progress you can show your auditors."</td><td>Security has urgency and budget; it's the fastest first win (bet 2).</td></tr>
+<tr><td>Answer the coding-agent question</td><td>Section: <b>"Your coding agent works in one repo. This works across all of them."</b> A two-column comparison: scope, coordination, CI repair, tracking, pricing.</td><td>Turns the biggest objection into the reason to buy.</td></tr>
+<tr><td>Put numbers in the proof</td><td>"Mercari: one prompt, ~80 affected repositories, one plan." · "Canva: 50+ merged PRs on a library migration, without spreadsheets." · "1,000+ changesets merged in beta."</td><td>Numbers make quotes believable to engineers and executives.</td></tr>
+<tr><td>Show where it runs</td><td>"Available on Sourcegraph Cloud and self-hosted (8.0+). Works with GitHub, GitLab, Bitbucket Server and Cloud, Azure DevOps and Gerrit."</td><td>Removes a silent disqualifier for regulated accounts.</td></tr>
+<tr><td>Make pricing concrete</td><td>Worked example: "200 repos in scope, 190 changesets approved and merged: you pay for 190. The 10 you declined cost nothing."</td><td>Makes outcome pricing feel safe, not abstract.</td></tr>
+<tr><td>Add an engineer FAQ</td><td>What counts as a changeset? · Does it push to main? (no: changesets for review) · What if CI is flaky? · Can it follow our conventions? (skills and AGENTS.md) · Does it work with existing batch specs? (yes)</td><td>Answers trust questions before the demo call.</td></tr>
+</table></div>
+</section>
+
+<!-- 4 HOW IT WORKS -->
+<section id="how">
+<h2>4. How it works &amp; the demo</h2>
+<p>The technical story is the sales story. This is the flow I would put in the launch blog, the docs overview and the first demo slide, built from the public changelog (14 and 28 Sept 2026).</p>
+<div class="diagram">
+<svg viewBox="0 0 1000 470" role="img" aria-label="Agentic Batch Changes flow from prompt to merged changesets">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a8fa0"/></marker></defs>
+  <style>
+    .b{fill:none;stroke:#8a8fa0;stroke-width:1.3;rx:10}
+    .acc{fill:#5b4bdb;fill-opacity:.1;stroke:#5b4bdb;stroke-width:2}
+    .t{font:600 14px Inter,Arial,sans-serif;fill:currentColor}
+    .s{font:12px Inter,Arial,sans-serif;fill:#7a8090}
+    .l{stroke:#8a8fa0;stroke-width:1.3;fill:none}
+    .h{font:600 12px 'JetBrains Mono',monospace;fill:#5b4bdb;letter-spacing:.06em}
+  </style>
+  <g style="color:var(--ink)">
+  <text class="h" x="20" y="24">1 · SCOPE</text>
+  <text class="h" x="350" y="24">2 · EXECUTE (per repo)</text>
+  <text class="h" x="760" y="24">3 · CONTROL</text>
+
+  <rect class="b" x="20" y="40" width="270" height="62" rx="10"/>
+  <text class="t" x="36" y="66">Engineer describes the change</text>
+  <text class="s" x="36" y="86">plain language, typed or dictated</text>
+
+  <rect class="acc" x="20" y="130" width="270" height="72" rx="10"/>
+  <text class="t" x="36" y="156">Coordinator agent</text>
+  <text class="s" x="36" y="176">uses Deep Search + Code Search to find</text>
+  <text class="s" x="36" y="192">every affected repo and write a plan</text>
+
+  <rect class="b" x="20" y="230" width="270" height="62" rx="10"/>
+  <text class="t" x="36" y="256">Pilot on one repository</text>
+  <text class="s" x="36" y="276">validate the approach before fan-out</text>
+
+  <rect class="b" x="20" y="320" width="270" height="78" rx="10"/>
+  <text class="t" x="36" y="346">Guidance applied</text>
+  <text class="s" x="36" y="366">skills + AGENTS.md-style rules at</text>
+  <text class="s" x="36" y="382">user, org or global level</text>
+
+  <rect class="b" x="350" y="40" width="340" height="62" rx="10"/>
+  <text class="t" x="366" y="66">Deterministic step → script</text>
+  <text class="s" x="366" y="86">same change everywhere, cheap and repeatable</text>
+
+  <rect class="acc" x="350" y="130" width="340" height="90" rx="10"/>
+  <text class="t" x="366" y="156">Judgment step → coding agent</text>
+  <text class="s" x="366" y="176">Sourcegraph-managed agent with MCP tools</text>
+  <text class="s" x="366" y="192">and Finder, Oracle, Worker subagents</text>
+  <text class="s" x="366" y="208">handles repos that are similar, not identical</text>
+
+  <rect class="b" x="350" y="250" width="340" height="62" rx="10"/>
+  <text class="t" x="366" y="276">Push changeset, run CI</text>
+  <text class="s" x="366" y="296">GitHub Actions, Buildkite and others</text>
+
+  <rect class="b" x="350" y="340" width="340" height="78" rx="10"/>
+  <text class="t" x="366" y="366">React until CI-healthy</text>
+  <text class="s" x="366" y="386">reads CI logs, pushes fixes, resolves merge</text>
+  <text class="s" x="366" y="402">conflicts; asks the user when stuck</text>
+
+  <rect class="acc" x="760" y="130" width="220" height="90" rx="10"/>
+  <text class="t" x="776" y="156">Human review</text>
+  <text class="s" x="776" y="176">engineers see diffs as they're</text>
+  <text class="s" x="776" y="192">generated and approve every</text>
+  <text class="s" x="776" y="208">changeset before merge</text>
+
+  <rect class="b" x="760" y="250" width="220" height="62" rx="10"/>
+  <text class="t" x="776" y="276">Track every PR</text>
+  <text class="s" x="776" y="296">merge status in one place</text>
+
+  <rect class="b" x="760" y="340" width="220" height="78" rx="10"/>
+  <text class="t" x="776" y="366">Pay per merge</text>
+  <text class="s" x="776" y="386">billed per changeset merged;</text>
+  <text class="s" x="776" y="402">declined PRs cost nothing</text>
+
+  <path class="l" d="M155 102V130" marker-end="url(#ar)"/>
+  <path class="l" d="M155 202V230" marker-end="url(#ar)"/>
+  <path class="l" d="M290 261H320V71H350" marker-end="url(#ar)"/>
+  <path class="l" d="M320 175H350" marker-end="url(#ar)"/>
+  <path class="l" d="M520 102V130" marker-end="url(#ar)"/>
+  <path class="l" d="M520 220V250" marker-end="url(#ar)"/>
+  <path class="l" d="M520 312V340" marker-end="url(#ar)"/>
+  <path class="l" d="M690 379H725V175H760" marker-end="url(#ar)"/>
+  <path class="l" d="M870 220V250" marker-end="url(#ar)"/>
+  <path class="l" d="M870 312V340" marker-end="url(#ar)"/>
+  <path class="l" d="M155 320V292" marker-end="url(#ar)"/>
+  <text class="s" x="20" y="440">Platform underneath: Sourcegraph code index · Code Search · Deep Search · Code Navigation · MCP server · executors · 6 code hosts · Cloud or self-hosted 8.0</text>
+  </g>
+</svg>
+</div>
+
+<h3>Technical proof points engineers will ask about</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:28%">Question</th><th>Answer we can show</th></tr>
+<tr><td>How does it know which repos to change?</td><td>The coordinator uses Sourcegraph Code Search and Deep Search across the indexed codebase. Deep Search runs an agentic search loop, returns cited sources and can export large analyses as CSV or JSON.</td></tr>
+<tr><td>Is every change written by an LLM?</td><td>No. Each part of the plan gets a script when the change is deterministic and a coding agent only when judgment is needed.</td></tr>
+<tr><td>What happens when CI fails?</td><td>It reads the CI logs, pushes follow-up commits and asks a coding agent to resolve merge conflicts. It stops and asks when it's stuck.</td></tr>
+<tr><td>Can it follow our repo conventions?</td><td>Yes: skills and <code>AGENTS.md</code>-style guidance at user, org or global level. Attribution can live in commit trailers only (<code>batchChanges.attributionMode: trailerOnly</code>).</td></tr>
+<tr><td>Will our existing work break?</td><td>Existing batch specs remain compatible after the move to the Sourcegraph-managed coding agent.</td></tr>
+<tr><td>Can our own agents use the same context?</td><td>Yes. The Sourcegraph MCP server (GA Feb 2026) exposes search, navigation, history and Deep Search tools to Claude Code, Codex, Cursor, Copilot, Amp and others, with OAuth and an <code>mcp</code> scope.</td></tr>
+<tr><td>Where does it run?</td><td>Sourcegraph Cloud, and self-hosted from Sourcegraph 8.0.</td></tr>
+</table></div>
+
+<h3>Demo script (7 minutes): "Patch it everywhere before lunch"</h3>
+<p>Built on the most relatable public story: a GitHub Actions environment-variable injection pattern across many repos (the Mercari use case), run on a demo org.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:10%">Time</th><th style="width:32%">On screen</th><th>Talk track</th></tr>
+<tr><td>0:00</td><td>The security advisory and a repo count</td><td>"Security found a risky pattern in our GitHub Actions. Question one is always: where else?"</td></tr>
+<tr><td>0:45</td><td>Prompt typed into ABC</td><td>"I describe the fix once, in plain English. No spec to write."</td></tr>
+<tr><td>1:30</td><td>Plan view: affected repos from Deep Search, with sources</td><td>"It searched the whole codebase and shows its sources, so I can check its work before anything changes."</td></tr>
+<tr><td>2:30</td><td>Pilot repo diff</td><td>"It tries one repo first. I read the diff. Only then does it fan out."</td></tr>
+<tr><td>3:30</td><td>Fan-out: workspaces running, script vs agent steps</td><td>"Simple repos get a script. The odd ones get an agent that reads the code. Same outcome, different paths."</td></tr>
+<tr><td>4:30</td><td>A red CI run, then the follow-up commit</td><td>"CI failed on one service. It read the log and pushed a fix. I didn't touch it."</td></tr>
+<tr><td>5:30</td><td>Changeset list: status, approvals, merge tracking</td><td>"Every PR in one place. Nothing merges without an engineer approving it."</td></tr>
+<tr><td>6:30</td><td>Pricing line and next step</td><td>"You pay for changesets that merge. Want to try it on your own backlog item next week?"</td></tr>
+</table></div>
+
+<h3>The demo inputs, ready to run</h3>
+<p>A demo is only as credible as its prompt. This is the prompt and repo guidance I would give the agent, based on GitHub's own hardening advice for Actions: pass untrusted event data through an environment variable instead of interpolating it into a shell script.</p>
+<div class="grid g2">
+<div><p style="font-size:13px;color:var(--ink-2);margin:0 0 6px">Prompt to Agentic Batch Changes</p>
+<pre style="background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;font:13px/1.55 var(--mono);white-space:pre-wrap;margin:0">Find every GitHub Actions workflow in our org that
+interpolates untrusted event data directly into a
+`run:` script, for example:
+
+  run: echo "${{ github.event.issue.title }}"
+  run: git checkout ${{ github.head_ref }}
+
+For each one, move the value into a step-level `env:`
+variable and reference it as "$VAR" inside the script.
+Do not change workflow behaviour otherwise.
+
+Pilot on platform/ci-templates first. Skip archived
+repos. Open one changeset per repo with a short
+description linking to the security advisory.</pre></div>
+<div><p style="font-size:13px;color:var(--ink-2);margin:0 0 6px">AGENTS.md guidance (org level)</p>
+<pre style="background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;font:13px/1.55 var(--mono);white-space:pre-wrap;margin:0"># Conventions for automated changes
+
+- Keep diffs minimal. No formatting-only edits.
+- Workflows: quote all shell variables ("$VAR").
+- Never add new third-party actions; pin existing
+  ones by commit SHA if you touch them.
+- Changeset title: "security: &lt;short summary&gt;".
+- Link the advisory ID in the description.
+- If CI fails for reasons unrelated to the change,
+  stop and ask instead of "fixing" other code.</pre></div>
+</div>
+<p style="font-size:14px;color:var(--ink-2)">The before and after for one workflow step:</p>
+<pre style="background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;font:13px/1.55 var(--mono);margin:0"># before: untrusted title is expanded into the shell script
+- run: echo "New issue: ${{ github.event.issue.title }}"
+
+# after: the value reaches the script only as data
+- env:
+    ISSUE_TITLE: ${{ github.event.issue.title }}
+  run: echo "New issue: $ISSUE_TITLE"</pre>
+</section>
+
+<!-- 5 LAUNCH -->
+<section id="launch">
+<h2>5. Launch plan</h2>
+<h3>Launch tiering: make releases repeatable</h3>
+<p>The role asks for launches that are "repeatable and predictable". A simple tier model decides effort before anyone writes a word.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:12%">Tier</th><th style="width:28%">When</th><th style="width:30%">Assets</th><th>Example</th></tr>
+<tr><td><b>Tier 1</b></td><td>New product, new market or new pricing; changes the pitch</td><td>Blog, press, docs, webinar, demo video, enablement session, battlecard update, email to customers, social, DevRel content</td><td>ABC scale-up programme (this kit); self-hosted availability for enterprise</td></tr>
+<tr><td><b>Tier 2</b></td><td>Meaningful capability that changes a demo or objection</td><td>Blog or changelog feature, short video, enablement note, social, customer email segment</td><td>Move to the Sourcegraph-managed coding agent; dictation for agents</td></tr>
+<tr><td><b>Tier 3</b></td><td>Improvement or fix</td><td>Changelog entry, release note in the field digest</td><td>Attribution mode; changeset inspector Automations tab</td></tr>
+</table></div>
+
+<h3>Tier 1 timeline</h3>
+<div class="timeline">
+  <div class="phase"><div class="when">T−6 to T−4 wks</div><h4>Align</h4><ul><li>Launch brief signed off by PM, eng, DevRel, sales</li><li>Messaging house v1</li><li>Pick 2 customer proof stories</li><li>Pricing FAQ with finance</li></ul></div>
+  <div class="phase"><div class="when">T−4 to T−2 wks</div><h4>Build</h4><ul><li>Blog, docs overview, demo video</li><li>Battlecard, talk track, discovery guide</li><li>Webinar and landing page live</li><li>DevRel tutorial and skills examples</li></ul></div>
+  <div class="phase"><div class="when">T−2 to T−0</div><h4>Enable</h4><ul><li>Sales and CS enablement session, recorded</li><li>Certification: every AE gives the 7-minute demo</li><li>Customer advisory preview</li><li>Press and analyst pre-briefs</li></ul></div>
+  <div class="phase"><div class="when">Launch day</div><h4>Ship</h4><ul><li>Blog, changelog, press release</li><li>Customer email by segment</li><li>Social and DevRel posts</li><li>Field emails to target accounts</li></ul></div>
+  <div class="phase"><div class="when">T+1 to T+8 wks</div><h4>Sustain</h4><ul><li>Live webinar and replay</li><li>Weekly win and loss notes to the field</li><li>Case study from first new account</li><li>Launch retro and metrics review</li></ul></div>
+</div>
+
+<h3>RACI</h3>
+<div class="tablewrap"><table>
+<tr><th>Workstream</th><th>PMM</th><th>Product</th><th>DevRel</th><th>Demand Gen</th><th>Sales / CS</th></tr>
+<tr><td>Positioning and messaging</td><td>A / R</td><td>C</td><td>C</td><td>I</td><td>C</td></tr>
+<tr><td>Docs and technical tutorials</td><td>C</td><td>A</td><td>R</td><td>I</td><td>I</td></tr>
+<tr><td>Launch content (blog, video, web)</td><td>A / R</td><td>C</td><td>R</td><td>C</td><td>I</td></tr>
+<tr><td>Campaigns and webinar</td><td>C</td><td>I</td><td>R</td><td>A / R</td><td>I</td></tr>
+<tr><td>Sales enablement</td><td>A / R</td><td>C</td><td>C</td><td>I</td><td>R</td></tr>
+<tr><td>Customer proof</td><td>A</td><td>C</td><td>I</td><td>C</td><td>R</td></tr>
+</table></div>
+<p style="font-size:14px;color:var(--ink-2)">A = accountable, R = responsible, C = consulted, I = informed.</p>
+
+<h3>Launch blog draft (opening, ready to edit)</h3>
+<div class="card">
+<p style="font-size:13px;font-family:var(--mono);color:var(--accent);margin:0 0 6px">Headline options</p>
+<ul class="tight" style="color:var(--ink)"><li><b>The outer loop finally has an agent</b></li><li>Found once, fixed everywhere: fleet-wide change for enterprise codebases</li><li>Describe the change once. Ship it to every repo that needs it.</li></ul>
+<p style="font-size:13px;font-family:var(--mono);color:var(--accent);margin:14px 0 6px">Opening</p>
+<p style="color:var(--ink)">Coding agents made the inner loop fast. You can fix a bug or ship a feature in one repository in minutes. But the work that slows engineering organisations down rarely lives in one repository. It is the dependency upgrade that breaks in 300 services, the vulnerable pattern copied into 80 workflows, the end-of-life deadline nobody owns.</p>
+<p style="color:var(--ink)">Agentic Batch Changes is built for that outer loop. Describe the change once. The agent finds every repository it applies to, tries it on one first, then rolls it out with a script where the change is mechanical and a coding agent where it needs judgment. It reads your CI logs, fixes what breaks and tracks every changeset to merge. Your engineers approve every diff, and you pay only for the changes that merge.</p>
+</div>
+
+<details><summary>Launch readiness checklist (go / no-go)</summary>
+<ul class="tight">
+  <li>Docs live and reviewed by an engineer who has not seen the product before</li>
+  <li>Demo environment stable; backup recording ready</li>
+  <li>Pricing FAQ approved by finance and legal</li>
+  <li>Every AE and SE certified on the demo and objection handling</li>
+  <li>Support briefed; known issues documented</li>
+  <li>Telemetry live for the activation funnel (see section 8)</li>
+  <li>Customer quotes approved in writing</li>
+</ul>
+</details>
+</section>
+
+<!-- 6 ENABLEMENT -->
+<section id="enablement">
+<h2>6. Sales enablement</h2>
+<h3>Five-minute talk track</h3>
+<ol>
+  <li><b>Problem:</b> "How long did your last org-wide upgrade take, and who had to chase the teams?"</li>
+  <li><b>Shift:</b> "AI made writing code in one repo fast. Changing code across all of them is still manual."</li>
+  <li><b>Answer:</b> "Agentic Batch Changes plans the change across your whole codebase, applies it with a script or an agent as each repo needs, and keeps going until CI passes."</li>
+  <li><b>Trust:</b> "Your engineers approve every changeset, and you pay only for the ones that merge."</li>
+  <li><b>Proof and ask:</b> "Mercari patched a GitHub Actions vulnerability across about 80 repos. What's the change on your backlog nobody wants to own? Let's run it."</li>
+</ol>
+
+<h3>Discovery questions</h3>
+<div class="grid g2">
+  <div class="card"><h4>Size the pain</h4><ul class="tight"><li>How many repos and code hosts do you have?</li><li>What org-wide change is overdue right now?</li><li>How long did the last one take, and how many teams touched it?</li><li>How do you track progress today?</li></ul></div>
+  <div class="card"><h4>Find the urgency</h4><ul class="tight"><li>Any open CVEs or audit findings across many repos?</li><li>Upcoming end-of-life dates for runtimes, libraries or CI?</li><li>Who gets blamed when it slips?</li><li>Is there a mandate or deadline from leadership?</li></ul></div>
+  <div class="card"><h4>Qualify the fit</h4><ul class="tight"><li>Are you on Sourcegraph Cloud or self-hosted, and which version?</li><li>Which CI systems do you use?</li><li>Do you already use Batch Changes or coding agents?</li><li>Who reviews automated PRs today?</li></ul></div>
+  <div class="card"><h4>Map the buying group</h4><ul class="tight"><li>Who owns platform and developer experience?</li><li>Does security fund remediation tooling?</li><li>What does AI tool approval look like?</li><li>Who signs for usage-based spend?</li></ul></div>
+</div>
+
+<h3>Objection handling</h3>
+<div class="tablewrap"><table>
+<tr><th style="width:30%">Objection</th><th>Response</th></tr>
+<tr><td>"We already have Copilot / Claude Code / Cursor."</td><td>"Great, keep them for single-repo work. ABC is for changes that span hundreds of repos: it finds them all, coordinates the PRs and tracks every merge. Your agents can also use our MCP server for codebase context."</td></tr>
+<tr><td>"We don't trust AI to change production code."</td><td>"Neither do we, unsupervised. It pilots on one repo, uses scripts where the change is deterministic, keeps going until CI passes, and nothing merges without an engineer approving it."</td></tr>
+<tr><td>"Our CI is flaky; this will create noise."</td><td>"It reads CI logs and responds to real failures, and it stops to ask when it's stuck. Start with a scoped change on a set of repos you choose."</td></tr>
+<tr><td>"Usage pricing makes budgets unpredictable."</td><td>"You're billed per changeset merged, so spend follows outcomes. PRs you decline cost nothing, and admins can set limits."</td></tr>
+<tr><td>"We use OpenRewrite recipes already."</td><td>"Keep them for deterministic transforms. ABC runs scripts for those steps too, and adds an agent for the repos where the change needs judgment, plus planning, CI handling and tracking across all code hosts."</td></tr>
+<tr><td>"Our security team won't allow a cloud AI tool."</td><td>"ABC runs on self-hosted Sourcegraph 8.0 as well as Cloud, with admin controls over AI features."</td></tr>
+<tr><td>"Service owners will ignore bot PRs."</td><td>"PRs arrive CI-healthy, follow your AGENTS.md rules and can keep attribution to commit trailers. Owners review normal-looking, passing PRs."</td></tr>
+</table></div>
+
+<h3>ROI model for the business case</h3>
+<p>Every number below is an input the customer changes. The defaults are illustrative only.</p>
+<div class="calc" id="roi">
+  <div class="grid g3">
+    <div><label for="repos">Repos needing the change</label><input id="repos" type="number" value="200" min="1"></div>
+    <div><label for="hrs">Engineer hours per repo, manually</label><input id="hrs" type="number" value="3" min="0" step="0.5"></div>
+    <div><label for="rate">Loaded cost per engineer hour (USD)</label><input id="rate" type="number" value="100" min="0"></div>
+    <div><label for="rev">Review hours per repo with ABC</label><input id="rev" type="number" value="0.5" min="0" step="0.25"></div>
+    <div><label for="changes">Fleet-wide changes per year</label><input id="changes" type="number" value="6" min="1"></div>
+    <div><label for="weeks">Calendar weeks the manual effort takes</label><input id="weeks" type="number" value="12" min="1"></div>
+  </div>
+  <div class="out">
+    <div><b id="o1">—</b><span>engineer hours returned per year</span></div>
+    <div><b id="o2">—</b><span>labour cost avoided per year (before ABC cost)</span></div>
+    <div><b id="o3">—</b><span>repo-weeks of exposure per change, today</span></div>
+  </div>
+  <p style="font-size:13px;color:var(--ink-2);margin:12px 0 0">Formula: (manual hours − review hours) × repos × changes per year. Exposure = repos × calendar weeks, a simple way to show security risk that stays open while a manual fix rolls out. Subtract ABC cost (changesets merged × the customer's credit rate) for net value.</p>
+</div>
+
+<h3>Battlecard summary</h3>
+<div class="grid g3">
+  <div class="card"><h4>Why we win</h4><ul class="tight"><li>Full-codebase context from the Sourcegraph index</li><li>Script or agent per step, by design</li><li>CI-reactive loop with human approval</li><li>Any of 6 code hosts; Cloud or self-hosted</li><li>Pay per merged changeset</li></ul></div>
+  <div class="card"><h4>Where we lose (and what to do)</h4><ul class="tight"><li>Tiny repo estates: point to a coding agent instead, as Sourcegraph's own docs advise</li><li>No AI approval yet: start with Code Search and Deep Search value, return when AI terms are signed</li><li>Single urgent fix in one repo: not our use case</li></ul></div>
+  <div class="card"><h4>Landmines to set</h4><ul class="tight"><li>"How will you find every affected repo across all code hosts?"</li><li>"What happens when CI fails on repo 140?"</li><li>"How do you track which PRs merged?"</li><li>"What do you pay for PRs you reject?"</li></ul></div>
+</div>
+</section>
+
+<!-- 7 CAMPAIGNS -->
+<section id="campaigns">
+<h2>7. Integrated campaigns</h2>
+<p>One theme across demand gen, DevRel and field for the quarter: <b>"The Outer Loop"</b>, the work that spans every repo, and how to finally ship it.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:20%">Motion</th><th style="width:34%">Plays</th><th style="width:22%">Owner with PMM</th><th>Success signal</th></tr>
+<tr><td><b>Existing Batch Changes users</b> (upgrade)</td><td>In-product prompt and email: "Your specs still work; now add planning and CI repair." Office hours to convert one live batch change.</td><td>Product marketing, CS</td><td>% of active Batch Changes accounts with a first ABC merge</td></tr>
+<tr><td><b>Security-led ABM</b></td><td>Target accounts with public CVE exposure or compliance deadlines. AppSec-specific landing page, a "CVE to fixed everywhere" demo and executive briefing.</td><td>Demand gen, field, SE</td><td>Meetings with security leaders; opportunities sourced</td></tr>
+<tr><td><b>Webinar / live build</b></td><td>"Patch it everywhere, live": run a real fleet-wide change on stream, answer questions, publish the replay and the AGENTS.md used.</td><td>DevRel, demand gen</td><td>Registrations → trial or POC requests</td></tr>
+<tr><td><b>DevRel content</b></td><td>Tutorials: writing good change prompts, AGENTS.md patterns, skills library, "script or agent?" guide. Migration recipes for common upgrades.</td><td>DevRel</td><td>Docs traffic to activation; community shares</td></tr>
+<tr><td><b>Customer proof</b></td><td>Case studies with Mercari- and Canva-style stories; short engineer-voice videos; numbers in every story.</td><td>PMM, CS</td><td>Stories used in late-stage deals</td></tr>
+<tr><td><b>Field and events</b></td><td>Platform engineering and security events; a 20-minute talk on fleet-wide change; dinner roundtables for heads of platform.</td><td>Field marketing</td><td>Pipeline from event-sourced accounts</td></tr>
+<tr><td><b>Web and SEO</b></td><td>Use-case pages: dependency upgrades, CVE remediation, end-of-life migrations, CI modernisation, internal API rollouts.</td><td>Web, demand gen</td><td>Organic sign-ups and demo requests per use case</td></tr>
+</table></div>
+</section>
+
+<!-- 8 METRICS -->
+<section id="metrics">
+<h2>8. Metrics &amp; attribution</h2>
+<p>Because ABC is priced per merged changeset, product usage and revenue measure the same thing. That makes attribution unusually clean, and the funnel events Sourcegraph added on 28 September (client and server-side) make it measurable.</p>
+<div class="tablewrap"><table>
+<tr><th style="width:22%">Stage</th><th style="width:38%">Metric</th><th>Why it matters</th></tr>
+<tr><td>Awareness</td><td>Use-case page visits, webinar registrations, DevRel tutorial views</td><td>Is the "outer loop" message landing with the right roles?</td></tr>
+<tr><td>Activation</td><td>Time from first prompt to first approved plan; first merged changeset per account</td><td>The aha moment is the first merge, not the first prompt.</td></tr>
+<tr><td>Adoption</td><td>Batch changes per account per month; repos touched; % of plans that reach merge</td><td>Shows repeat use beyond a single pilot.</td></tr>
+<tr><td>Revenue</td><td>Changesets merged (billable); expansion from Batch Changes accounts; new logos with ABC in the deal</td><td>Direct link from usage to revenue.</td></tr>
+<tr><td>Sales impact</td><td>Pipeline influenced, win rate when ABC is demoed vs not, deal cycle length</td><td>Proves PMM assets move deals, not just traffic.</td></tr>
+<tr><td>Quality</td><td>% of changesets declined, CI pass rate after agent fixes, reviewer satisfaction</td><td>Protects trust, the thing the whole message depends on.</td></tr>
+</table></div>
+<p><b>Attribution approach:</b> tag every campaign and enablement asset; record ABC demos in the CRM; compare cohorts that saw the demo with those that didn't; report monthly on merged changesets and pipeline by source. The one-year goal in the role, "clearly attribute activities to revenue impact", starts with this instrumentation in month one.</p>
+</section>
+
+<!-- 9 PLAN -->
+<section id="plan">
+<h2>9. My 30 / 90 / 180 / 365-day plan</h2>
+<div class="grid g4">
+  <div class="card"><h4>First month</h4><ul class="tight"><li>Use every product myself; run a real batch change</li><li>Listen to recorded sales calls and read every lost-deal note from the last two quarters</li><li>Interview 5 customers and 5 lost deals</li><li>Audit messaging, docs and enablement; ship 3 quick wins</li></ul></div>
+  <div class="card"><h4>Three months</h4><ul class="tight"><li>Messaging framework for ABC, Deep Search, Code Search and MCP</li><li>Lead the next Tier 1 launch end to end</li><li>Battlecards, talk tracks and demo certification live</li><li>Weekly operating rhythm with GTM and EPD</li></ul></div>
+  <div class="card"><h4>Six months</h4><ul class="tight"><li>Tiered launch process used by every team</li><li>Security-led ABM programme producing pipeline</li><li>Two new customer stories with numbers</li><li>Joint campaigns with demand gen and DevRel running monthly</li></ul></div>
+  <div class="card"><h4>One year</h4><ul class="tight"><li>Marketing activity tied to merged changesets and pipeline</li><li>Shape GTM strategy for agentic products</li><li>Category language ("fleet-wide change") used by customers and analysts</li><li>Reusable PMM playbook for the team</li></ul></div>
+</div>
+</section>
+
+<!-- 10 ASSUMPTIONS -->
+<section id="assumptions">
+<h2>10. Open questions I would validate first</h2>
+<ul class="tight">
+  <li>Which use case drives the most merged changesets today: security fixes, dependency upgrades or migrations?</li>
+  <li>How do Cloud and self-hosted accounts differ in ABC adoption, and what blocks self-hosted customers from enabling AI features?</li>
+  <li>How do buyers react to per-merge pricing in procurement, and what limits do admins set first?</li>
+  <li>Where do deals stall: security review, champion strength or proving value in a POC?</li>
+  <li>Which competitor comes up most in lost deals, and with which persona?</li>
+  <li>How should ABC, Deep Search, Code Search and the MCP server be packaged and told as one platform story?</li>
+</ul>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+  <li><a href="https://finance.yahoo.com/technology/ai/articles/sourcegraph-announces-general-availability-agentic-133000114.html">Sourcegraph announces GA of Agentic Batch Changes</a> (Business Wire, 14 Sep 2026)</li>
+  <li><a href="https://sourcegraph.com/changelog/2026-09-14">Sourcegraph changelog, 14 Sep 2026</a>: GA, pricing, self-hosted with 8.0, customisation</li>
+  <li><a href="https://sourcegraph.com/changelog/2026-09-28">Sourcegraph changelog, 28 Sep 2026</a>: managed coding agent, subagents, attribution mode, telemetry</li>
+  <li><a href="https://sourcegraph.com/blog/agentic-batch-changes-public-beta">Agentic Batch Changes is now in public beta</a> (Sourcegraph blog)</li>
+  <li><a href="https://sourcegraph.com/docs/deep-search">Deep Search documentation</a> and <a href="https://sourcegraph.com/blog/deep-search">Deep Search blog</a></li>
+  <li><a href="https://sourcegraph.com/changelog/mcp-ga">Sourcegraph MCP server GA</a> and <a href="https://sourcegraph.com/docs/api/mcp">MCP server docs</a></li>
+  <li><a href="https://sourcegraph.com/agentic-batch-changes">Agentic Batch Changes product page</a> and <a href="https://sourcegraph.com">Sourcegraph homepage</a>, read 4 Nov 2026 for the messaging audit</li>
+  <li><a href="https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions">GitHub: Security hardening for GitHub Actions</a>, for the demo pattern</li>
+  <li><a href="https://sourcegraph.com/blog/batch-changes-is-better-than-ever">Batch Changes is better than ever</a> (Sourcegraph blog)</li>
+  <li><a href="https://moderne.ai/blog/overview-of-openrewrite-and-moderne">Overview of OpenRewrite and Moderne</a> (Moderne blog), for the competitive section</li>
+  <li>Sourcegraph Senior Product Marketing Manager [IC4] job posting, for company context ($50M ARR; customers including Stripe, Reddit and Leidos)</li>
+</ul>
+</section>
+
+<footer>
+  Made by <b>Mahnoor Shahid</b> as an independent work sample for the Senior Product Marketing Manager role at Sourcegraph. Not affiliated with or endorsed by Sourcegraph; product names belong to their owners. ·
+  <a href="mailto:mahnoor.cw@gmail.com">mahnoor.cw@gmail.com</a> · <a href="https://www.linkedin.com/in/heymahnoor">LinkedIn</a> · <a href="https://github.com/heymahnoor">GitHub</a>
+</footer>
+</main>
+</div>
+<script>
+(function(){
+  var ids=['repos','hrs','rate','rev','changes','weeks'];
+  function v(id){var n=parseFloat(document.getElementById(id).value);return isNaN(n)?0:n;}
+  function fmt(n){return Math.round(n).toLocaleString('en-US');}
+  function calc(){
+    var saved=Math.max(0,v('hrs')-v('rev'))*v('repos')*v('changes');
+    document.getElementById('o1').textContent=fmt(saved);
+    document.getElementById('o2').textContent='$'+fmt(saved*v('rate'));
+    document.getElementById('o3').textContent=fmt(v('repos')*v('weeks'));
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',calc);});
+  calc();
+})();
+</script>
+</body>
+</html>
